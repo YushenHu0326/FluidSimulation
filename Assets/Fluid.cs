@@ -88,6 +88,22 @@ public class Fluid : MonoBehaviour
         }
     }
 
+    void UpdateGrid()
+    {
+        for (int i = 0; i < particleNum; i++)
+        {
+            float gx = Mathf.Floor(p_pos[i].x / grid_size_x);
+            float gy = Mathf.Floor(p_pos[i].y / grid_size_y);
+            float gz = Mathf.Floor(p_pos[i].z / grid_size_z);
+            grid[((int)gx * gridX + (int)gy) * gridY + gridZ] += 1;
+        }
+    }
+
+    void ParticleVelToGrid()
+    {
+
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -124,7 +140,7 @@ public class Fluid : MonoBehaviour
     void Update()
     {
         AddGravity();
-
+        UpdateGrid();
         BoundaryCheck();
         AddMovement();
     }
