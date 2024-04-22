@@ -19,7 +19,7 @@ public class Fluid : MonoBehaviour
     public int gridX = 50;
     public int gridY = 50;
     public int gridZ = 50;
-    int[] grid;
+    int[,,] grid;
     float[] grid_vx;
     float[] grid_vy;
     float[] grid_vz;
@@ -90,8 +90,7 @@ public class Fluid : MonoBehaviour
             float gx = Mathf.Floor(p_pos[i].x);
             float gy = Mathf.Floor(p_pos[i].y);
             float gz = Mathf.Floor(p_pos[i].z);
-            Debug.Log(((int)gx * gridY + (int)gy) * gridZ + (int)gz);
-            grid[((int)gx * gridY + (int)gy) * gridZ + (int)gz] += 1;
+            grid[(int)gx, (int)gy, (int)gz] += 1;
         }
     }
 
@@ -105,7 +104,7 @@ public class Fluid : MonoBehaviour
     void Start()
     {
         // initialize grid
-        grid = new int[gridX * gridY * gridZ];
+        grid = new int[gridX, gridY, gridZ];
         grid_vx = new float[(gridX - 1) * gridY * gridZ];
         grid_vy = new float[gridX * (gridY - 1) * gridZ];
         grid_vz = new float[gridX * gridY * (gridZ - 1)];
@@ -133,8 +132,10 @@ public class Fluid : MonoBehaviour
     void Update()
     {
         AddGravity();
-        UpdateGrid();
         BoundaryCheck();
+        UpdateGrid();
+
+
         AddMovement();
     }
 }
