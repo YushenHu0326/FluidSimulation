@@ -250,12 +250,9 @@ MonoBehaviour:
   particleMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   particleMat: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   particleNum: 100
-  boundXMax: 20
-  boundYMax: 20
-  boundZMax: 20
-  gridX: 50
-  gridY: 50
-  gridZ: 50
+  gridX: 20
+  gridY: 20
+  gridZ: 20
 --- !u!4 &914452904
 Transform:
   m_ObjectHideFlags: 0

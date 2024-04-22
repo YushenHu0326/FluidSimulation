@@ -15,11 +15,6 @@ public class Fluid : MonoBehaviour
     Vector3[] p_pos;
     Vector3[] p_vel;
 
-    // boundary
-    public int boundXMax = 20;
-    public int boundYMax = 20;
-    public int boundZMax = 20;
-
     // grid
     public int gridX = 50;
     public int gridY = 50;
@@ -58,9 +53,9 @@ public class Fluid : MonoBehaviour
                 p_pos[i].x = 0.01f;
                 p_vel[i].x = -p_vel[i].x * 0.5f;
             }
-            if (p_pos[i].x > boundXMax)
+            if (p_pos[i].x > gridX)
             {
-                p_pos[i].x = boundXMax - 0.01f;
+                p_pos[i].x = gridX - 0.01f;
                 p_vel[i].x = -p_vel[i].x * 0.5f;
             }
 
@@ -69,9 +64,9 @@ public class Fluid : MonoBehaviour
                 p_pos[i].y = 0.01f;
                 p_vel[i].y = -p_vel[i].y * 0.5f;
             }
-            if (p_pos[i].y > boundYMax)
+            if (p_pos[i].y > gridY)
             {
-                p_pos[i].y = boundYMax - 0.01f;
+                p_pos[i].y = gridY - 0.01f;
                 p_vel[i].y = -p_vel[i].y * 0.5f;
             }
 
@@ -80,9 +75,9 @@ public class Fluid : MonoBehaviour
                 p_pos[i].z = 0.01f;
                 p_vel[i].z = -p_vel[i].z * 0.5f;
             }
-            if (p_pos[i].z > boundZMax)
+            if (p_pos[i].z > gridZ)
             {
-                p_pos[i].z = boundZMax - 0.01f;
+                p_pos[i].z = gridZ - 0.01f;
                 p_vel[i].z = -p_vel[i].z * 0.5f;
             }
         }
@@ -92,10 +87,11 @@ public class Fluid : MonoBehaviour
     {
         for (int i = 0; i < particleNum; i++)
         {
-            float gx = Mathf.Floor(p_pos[i].x / grid_size_x);
-            float gy = Mathf.Floor(p_pos[i].y / grid_size_y);
-            float gz = Mathf.Floor(p_pos[i].z / grid_size_z);
-            grid[((int)gx * gridX + (int)gy) * gridY + gz] += 1;
+            float gx = Mathf.Floor(p_pos[i].x);
+            float gy = Mathf.Floor(p_pos[i].y);
+            float gz = Mathf.Floor(p_pos[i].z);
+            Debug.Log(((int)gx * gridY + (int)gy) * gridZ + (int)gz);
+            grid[((int)gx * gridY + (int)gy) * gridZ + (int)gz] += 1;
         }
     }
 
@@ -113,9 +109,6 @@ public class Fluid : MonoBehaviour
         grid_vx = new float[(gridX - 1) * gridY * gridZ];
         grid_vy = new float[gridX * (gridY - 1) * gridZ];
         grid_vz = new float[gridX * gridY * (gridZ - 1)];
-        grid_size_x = boundXMax / gridX;
-        grid_size_y = boundYMax / gridY;
-        grid_size_z = boundZMax / gridZ;
 
         // initialize particle
         particles = new GameObject[particleNum];
