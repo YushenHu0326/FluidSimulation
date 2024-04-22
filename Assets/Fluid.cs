@@ -95,7 +95,7 @@ public class Fluid : MonoBehaviour
             float gx = Mathf.Floor(p_pos[i].x / grid_size_x);
             float gy = Mathf.Floor(p_pos[i].y / grid_size_y);
             float gz = Mathf.Floor(p_pos[i].z / grid_size_z);
-            grid[((int)gx * gridX + (int)gy) * gridY + gridZ] += 1;
+            grid[((int)gx * gridX + (int)gy) * gridY + gz] += 1;
         }
     }
 
